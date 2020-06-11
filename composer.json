@@ -15,14 +15,20 @@
         "jeroennoten/laravel-adminlte": "^3.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0"
+        "laravel/ui": "^2.0",
+        "laravelcollective/html": "^6.1",
+        "doctrine/dbal": "~2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "infyomlabs/laravel-generator": "7.0.x-dev",
+
+        "infyomlabs/adminlte-templates": "7.0.x-dev",
+        "infyomlabs/generator-builder": "dev-master",
     },
     "config": {
         "optimize-autoloader": true,
