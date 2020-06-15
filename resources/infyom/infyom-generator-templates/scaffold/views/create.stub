@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+@section('title', '$MODEL_NAME_HUMAN$')
+@section('content_header')
+    <h1>$MODEL_NAME_HUMAN$</h1>
+@stop
 
 @section('content')
-    <section class="content-header">
-        <h1>
-            $MODEL_NAME_HUMAN$
-        </h1>
-    </section>
     <div class="content">
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">

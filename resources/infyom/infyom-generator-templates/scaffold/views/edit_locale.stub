@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+@section('title', @lang('models/$MODEL_NAME_PLURAL_CAMEL$.singular'))
+@section('content_header')
+    <h1>@lang('models/$MODEL_NAME_PLURAL_CAMEL$.singular')</h1>
+@stop
 
-@section('content')
-    <section class="content-header">
-        <h1>
-            @lang('models/$MODEL_NAME_PLURAL_CAMEL$.singular')
-        </h1>
-   </section>
+@section('content')    
    <div class="content">
        @include('adminlte-templates::common.errors')
        <div class="box box-primary">

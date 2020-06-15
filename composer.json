@@ -26,9 +26,8 @@
         "nunomaduro/collision": "^4.1",
         "phpunit/phpunit": "^8.5",
         "infyomlabs/laravel-generator": "7.0.x-dev",
-
         "infyomlabs/adminlte-templates": "7.0.x-dev",
-        "infyomlabs/generator-builder": "dev-master",
+        "infyomlabs/generator-builder": "dev-master"
     },
     "config": {
         "optimize-autoloader": true,
