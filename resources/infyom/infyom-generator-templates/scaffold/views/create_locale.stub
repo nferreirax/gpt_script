@@ -5,23 +5,30 @@
 @stop
 
 @section('content')
-    <section class="content-header">
-        <h1>
-            @lang('models/$MODEL_NAME_PLURAL_CAMEL$.singular')
-        </h1>
-    </section>
-    <div class="content">
-        @include('adminlte-templates::common.errors')
-        <div class="box box-primary">
-            <div class="box-body">
-                <div class="row">
-                    {!! Form::open(['route' => '$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.store']) !!}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            @include('adminlte-templates::common.errors')
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">@lang('models/$MODEL_NAME_PLURAL_CAMEL$.singular')</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                     {!! Form::open(['route' => '$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.store']) !!}
 
                         @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.fields')
 
                     {!! Form::close() !!}
+
                 </div>
+                <!-- /.card -->
             </div>
         </div>
-    </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
 @endsection

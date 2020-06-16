@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class User
  * @package App\Models
- * @version June 15, 2020, 6:49 pm UTC
+ * @version June 16, 2020, 11:11 am UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection $achievementLogs
  * @property \Illuminate\Database\Eloquent\Collection $creditDebits

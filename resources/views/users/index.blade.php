@@ -12,13 +12,13 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"> <a class="btn btn-primary pull-right" href="{{ route('users.create') }}">Add New</a></h3>
+                    <h3 class="card-title"> <a class="btn btn-primary pull-right" href="{!! route('users.create') !!}">Add New</a></h3>
                 </div>               
                 <div class="card-body">
                     <div class="clearfix"></div>
 
                     @include('flash::message')
-                    @include('users.table')               
+                    @include('users.table')       
                 </div>             
             </div>
         </div>
@@ -29,3 +29,4 @@
 @section('css')
 
 @stop
+

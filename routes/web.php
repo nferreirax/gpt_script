@@ -44,3 +44,29 @@ Route::post(
 )->name('io_generator_builder_generate_from_file');
 
 Route::resource('users', 'UserController');
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+
+Route::resource('users', 'UserController')->middleware('auth');
+
+
+Route::resource('users', 'UserController')->middleware('auth');
