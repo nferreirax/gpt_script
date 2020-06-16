@@ -22,7 +22,8 @@ class CreateUsersAchievementTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('user_id');
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->integer('offers')->nullable()->default('0');
             $table->integer('offers_last_month')->nullable()->default('0');
             $table->decimal('points', 11, 2)->nullable()->default('0.00');
