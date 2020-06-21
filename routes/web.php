@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => ['is_admin', 'admin'], 'namespace' => 'Admin'], function () {
+    require_once 'web_builder.php';
+  });
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,11 +24,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');
+// Route::get('/home', function() {
+//     return view('home');
+// })->name('home')->middleware('auth');
 
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
@@ -43,30 +45,11 @@ Route::post(
     '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
 )->name('io_generator_builder_generate_from_file');
 
-Route::resource('users', 'UserController');
-
-Route::resource('users', 'UserController')->middleware('auth');
 
 
 Route::resource('users', 'UserController')->middleware('auth');
 
 
-Route::resource('users', 'UserController')->middleware('auth');
 
 
-Route::resource('users', 'UserController')->middleware('auth');
 
-
-Route::resource('users', 'UserController')->middleware('auth');
-
-
-Route::resource('users', 'UserController')->middleware('auth');
-
-
-Route::resource('users', 'UserController')->middleware('auth');
-
-
-Route::resource('users', 'UserController')->middleware('auth');
-
-
-Route::resource('users', 'UserController')->middleware('auth');
