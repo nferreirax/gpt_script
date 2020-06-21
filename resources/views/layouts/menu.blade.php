@@ -14,3 +14,11 @@
     <a href="{{ route('adminLoginLogs.index') }}"><i class="fa fa-edit"></i><span>Admin Login Logs</span></a>
 </li>
 
+<li class="{{ Request::is('creditDebits*') ? 'active' : '' }}">
+    <a href="{{ route('creditDebits.index') }}"><i class="fa fa-edit"></i><span>Credit Debits</span></a>
+</li>
+
+<li class="{{ Request::is('creditDebitManuallies*') ? 'active' : '' }}">
+    <a href="{{ route('creditDebitManuallies.index') }}"><i class="fa fa-edit"></i><span>Credit Debit Manuallies</span></a>
+</li>
+
