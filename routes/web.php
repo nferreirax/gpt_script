@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => ['is_admin', 'admin'], 'namespace' => 'Admin'], function () {
+// Route::group(['middleware' => ['is_admin', 'admin'], 'namespace' => 'Admin'], function () {
+Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function () {
     require_once 'web_builder.php';
   });
 
