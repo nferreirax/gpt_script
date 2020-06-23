@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $offer_name
  * @property string|\Carbon\Carbon $date_credited
  */
-class offersHistory extends Model
+class OffersHistory extends Model
 {
     use SoftDeletes;
 

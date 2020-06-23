@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -70,8 +71,7 @@ class User extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'email' => 'required',
-        'password' => 'required'
+        'email' => 'required',      
     ];
 
     /**
@@ -161,4 +161,102 @@ class User extends Model
     {
         return $this->hasMany(\App\Models\UsersWallet::class, 'user_id');
     }
+
+     /**
+     * stats for admin panel
+     */
+    public static function countTotalMembers()
+    {
+        return self::count();
+    }
+    public static function countTotalMembersToday()
+    {
+        return self::whereDate('created_at', Carbon::today())->count();
+    }
+
+    public static function sumTotalMembersBalances()
+    {
+        return UserWallet::where('wallet_id', '!=', 1)->sum('amount');
+    }
+
+    public static function sumTotalMembersPoints()
+    {
+        return UserWallet::where('wallet_id', 1)->sum('amount');
+    }
+    /** 
+     * stats for admin panel end
+     */
+
+    public function getUserWallet($wallet_id)
+    {
+        if($this->wallets) {
+            foreach ($this->wallets as $user_wallet) {
+                if ($user_wallet->wallet_id == $wallet_id) {
+                    return $user_wallet ?? 0;
+                }
+            }
+        }
+        
+        //if get here means user haven't wallet, create one
+        $user_wallet = UserWallet::create([
+            'user_id' => $this->id,
+            'wallet_id' => $wallet_id,
+            'amount' => 0
+        ]);
+        return $user_wallet;
+    }
+
+      /**
+     * $amount
+     * $wallet_id
+     * $type
+     * $realated_id
+     */
+    public function deductBalance($amount, $wallet_id, $type, $related_id)
+    {
+        $user_wallet = $this->getUserWallet($wallet_id);
+        if ($user_wallet->amount >= $amount) {
+            //deduct balance
+            $user_wallet->amount -= $amount;
+            $user_wallet->save();
+
+            //save credit/debit log
+            $log = new CreditDebit();
+            $log->user_id = $this->id;
+            $log->amount = $amount;
+            $log->type = $type;
+            $log->related_id = $related_id;
+            $log->wallet_id = $wallet_id;
+            $log->status = 1;
+            $log->save();
+          
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+   
+
+    public function addBalance($amount, $wallet_id, $type, $related_id)
+    {
+
+        $user_wallet = $this->getUserWallet($wallet_id);
+        //deduct balance
+        $user_wallet->amount += $amount;
+        $user_wallet->save();
+
+        //save credit/debit log
+        $log = new CreditDebit();
+        $log->user_id = $this->id;
+        $log->amount = $amount;
+        $log->type = $type;
+        $log->related_id = $related_id;
+        $log->wallet_id = $wallet_id;
+        $log->status = 1;
+        $log->save();
+      
+        return true;
+    }
+
 }

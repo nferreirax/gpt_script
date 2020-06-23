@@ -20,7 +20,12 @@
                 @endif>
                 {{-- Configured sidebar links --}}
                 @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
-                @include('layouts.menu')
+                @if (Auth::user()->is_admin)
+                @include('app.admin.layouts.menu')
+                @else
+                @include('app.frontend.layouts.menu')
+                @endif
+              
             </ul>
         </nav>
     </div>

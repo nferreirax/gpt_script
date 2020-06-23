@@ -6,8 +6,11 @@ use App\Http\Requests\CreateCreditDebitManuallyRequest;
 use App\Http\Requests\UpdateCreditDebitManuallyRequest;
 use App\Repositories\CreditDebitManuallyRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\CreditDebitManually;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Flash;
+use Laracasts\Flash\Flash as FlashFlash;
 use Response;
 
 class CreditDebitManuallyController extends AppBaseController
@@ -151,6 +154,40 @@ class CreditDebitManuallyController extends AppBaseController
 
         Flash::success('Credit Debit Manually deleted successfully.');
 
+        return redirect(route('creditDebitManuallies.index'));
+    }
+    public function credit_debit(Request $request)
+    {
+        if(!$request->amount) {
+            Flash::error('You need enter a amount!');  
+            return redirect(route('admin.creditDebitManuallies.index'));
+        }
+        //check if user exists
+        $user = User::find($request->user_id);
+        if ($user) {                    
+             //save manual log
+            $log = CreditDebitManually::create([
+                'user_id' => $user->id,
+                'wallet_id' => $request->wallet_id,
+                'amount' => $request->amount,
+                'description' => $request->description,
+                'admin_notes' => $request->admin_notes,
+                'type' => $request->type,
+            ]);
+            //if is to credit
+            if ($request->type == 1) {
+                $type = 5;
+                //credit user                
+                $user->addBalance($request->amount, $request->wallet_id, $type, $log->id);
+            } else {
+                $type = 6;
+                //debit user
+                $user->deductBalance($request->amount, $request->wallet_id, $type, $log->id);
+            }  
+            Flash::success('Credit Debit done successfully.');  
+            return redirect(route('creditDebitManuallies.index'));       
+        }     
+        Flash::error('User not found');  
         return redirect(route('creditDebitManuallies.index'));
     }
 }

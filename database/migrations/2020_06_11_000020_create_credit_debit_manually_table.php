@@ -27,6 +27,7 @@ class CreateCreditDebitManuallyTable extends Migration
             $table->float('amount');
             $table->text('description')->nullable()->default(null);
             $table->text('admin_notes')->nullable()->default(null);
+            $table->integer('wallet_id');
             $table->timestamps();
             $table->softDeletes();
 

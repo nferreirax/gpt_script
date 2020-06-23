@@ -1,44 +1,47 @@
-<div class="table-responsive">
-    <table id="table" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>User Id</th>
-        <th>Amount</th>
-        <th>Description</th>
-        <th>Admin Notes</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($creditDebitManuallies as $creditDebitManually)
-                <tr>
-                    <td>{{ $creditDebitManually->user_id }}</td>
-            <td>{{ $creditDebitManually->amount }}</td>
-            <td>{{ $creditDebitManually->description }}</td>
-            <td>{{ $creditDebitManually->admin_notes }}</td>
-                    <td>
-                        {!! Form::open(['route' => ['creditDebitManuallies.destroy', $creditDebitManually->id], 'method' => 'delete']) !!}
-                        <div class='btn-group'>
-                            <a href="{{ route('creditDebitManuallies.show', [$creditDebitManually->id]) }}" class='btn btn-default'><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('creditDebitManuallies.edit', [$creditDebitManually->id]) }}" class='btn btn-default'><i class="fas fa-edit"></i></a>
-                            {!! Form::button('<i class="fas fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                        </div>
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        <tfoot>
-            <tr>
-               <th>User Id</th>
-        <th>Amount</th>
-        <th>Description</th>
-        <th>Admin Notes</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            @include('app.admin.credit_debit_manuallies.credit_debit_balance')           
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                {{-- <div class="card-header">
+                    <a class="btn btn-primary" href="{{ route('admin.creditDebits.create') }}">@lang('admin.ADD_NEW')</a>
+            </div> --}}
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="creditDebitManuallies-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Wallet</th>
+                                <th>Amount</th>
+                                <th>Member Notes</th>
+                                <th>Admin Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($creditDebitManuallies as $creditDebitManually)
+                            <tr>
+                                <td>{{ $creditDebitManually->id }}</td>
+                                <td>{{ $creditDebitManually->user->name }}</td>
+                                <td>{{ $creditDebitManually->wallet->name }}</td>
+                                <td>{{ $creditDebitManually->amount }}</td>
+                                <td>{{ $creditDebitManually->description }}</td>
+                                <td>{{ $creditDebitManually->admin_notes }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
 @section('js')
 <script>
     $(function () {

@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $ip
  * @property string $full_call
  */
-class offersLog extends Model
+class OffersLog extends Model
 {
     use SoftDeletes;
 

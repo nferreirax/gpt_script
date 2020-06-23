@@ -27,6 +27,8 @@ class CreateCreditDebitTable extends Migration
             $table->float('points');
             $table->integer('type')->comment('1=offerwalls; 2=Cashout; 3=downline Comissions; 4= credited manually;');
             $table->integer('related_id');
+            $table->integer('wallet_id');
+            $table->tinyInteger('status');            
             $table->timestamps();
             $table->softDeletes();
 

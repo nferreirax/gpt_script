@@ -52,7 +52,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $postback_url
  * @property string $postback_password
  */
-class offerwallNetworks extends Model
+class OfferwallNetworks extends Model
 {
     use SoftDeletes;
 

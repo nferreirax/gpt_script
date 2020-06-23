@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property \App\Models\User $user
  * @property integer $user_id
- * @property number $points
+ * @property number $amount
  * @property integer $type
  * @property integer $related_id
  */
@@ -32,9 +32,11 @@ class CreditDebit extends Model
 
     public $fillable = [
         'user_id',
-        'points',
+        'amount',
+        'wallet_id',
         'type',
-        'related_id'
+        'related_id',
+        'status'
     ];
 
     /**
@@ -45,7 +47,8 @@ class CreditDebit extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
-        'points' => 'float',
+        'wallet_id' => 'integer',
+        'amount' => 'float',
         'type' => 'integer',
         'related_id' => 'integer'
     ];
@@ -57,7 +60,8 @@ class CreditDebit extends Model
      */
     public static $rules = [
         'user_id' => 'required',
-        'points' => 'required',
+        'amount' => 'required',
+        'wallet_id' => 'required',
         'type' => 'required',
         'related_id' => 'required'
     ];
@@ -68,5 +72,9 @@ class CreditDebit extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
+    public function wallet()
+    {
+        return $this->belongsTo(\App\Models\Wallets::class, 'wallet_id');
     }
 }

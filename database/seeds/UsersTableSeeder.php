@@ -15,8 +15,17 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
+            'username'      => 'user',
             'name'      => 'User',
             'email'     => 'user@user.com',
+            'password'  => Hash::make('12345678'),
+            'email_verified_at' => Carbon::now()
+        ]);
+        User::create([
+            'username'      => 'admin',
+            'name'      => 'Admin',
+            'email'     => 'admin@admin.com',
+            'is_admin'     => 1,
             'password'  => Hash::make('12345678'),
             'email_verified_at' => Carbon::now()
         ]);

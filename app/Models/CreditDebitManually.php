@@ -33,6 +33,7 @@ class CreditDebitManually extends Model
     public $fillable = [
         'user_id',
         'amount',
+        'wallet_id',
         'description',
         'admin_notes'
     ];
@@ -46,6 +47,7 @@ class CreditDebitManually extends Model
         'id' => 'integer',
         'user_id' => 'integer',
         'amount' => 'float',
+        'wallet_id' => 'integer',        
         'description' => 'string',
         'admin_notes' => 'string'
     ];
@@ -57,7 +59,8 @@ class CreditDebitManually extends Model
      */
     public static $rules = [
         'user_id' => 'required',
-        'amount' => 'required'
+        'amount' => 'required',
+        'wallet_id' => 'required'
     ];
 
     /**
@@ -66,5 +69,9 @@ class CreditDebitManually extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
+    public function wallet()
+    {
+        return $this->belongsTo(\App\Models\Wallets::class, 'wallet_id');
     }
 }

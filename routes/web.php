@@ -12,46 +12,29 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::group(['middleware' => ['is_admin', 'admin'], 'namespace' => 'Admin'], function () {
-Route::group(['prefix' => 'admin','middleware' => ['auth'], 'namespace' => 'Admin'], function () {
+//admin routes
+Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Admin'], function () {
     require_once 'web_builder.php';
     Route::get('/dashboard', 'HomeController@index')->name('admin.dashboard');
-  });
-
-Route::get('/', function () {
-    return view('welcome');
+    Route::resource('users', 'UserController')->middleware('auth');
+    Route::post('credit-debit-user', 'CreditDebitManuallyController@credit_debit')->name('creditDebitManuall.credit-debit');
 });
 
 Auth::routes();
 
+//frontend routes
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('offerwalls', 'OfferwallsController@index')->name('offerwalls');
 
-
-// Route::get('/home', function() {
-//     return view('home');
-// })->name('home')->middleware('auth');
 
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
-
 Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate')->name('io_field_template');
-
 Route::get('relation_field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@relationFieldTemplate')->name('io_relation_field_template');
-
 Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate')->name('io_generator_builder_generate');
-
 Route::post('generator_builder/rollback', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@rollback')->name('io_generator_builder_rollback');
-
 Route::post(
     'generator_builder/generate-from-file',
     '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
 )->name('io_generator_builder_generate_from_file');
-
-
-
-Route::resource('users', 'UserController')->middleware('auth');
-
-
-
-
-
