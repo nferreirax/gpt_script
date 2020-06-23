@@ -15,11 +15,13 @@ class WalletsTableSeeder extends Seeder
         Wallets::create([
             'id'    => 1,
             'name'  => 'Points',
+            'sort' => 1,
             'active'=> 1
         ]);
         Wallets::create([
             'id'     => 2,
             'name'   => 'Balance',
+            'sort' => 1,
             'active' => 1
         ]);
     }
