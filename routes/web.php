@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //admin routes
-Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','isadmin'], 'namespace' => 'Admin'], function () {
     require_once 'web_builder.php';
     Route::get('/dashboard', 'HomeController@index')->name('admin.dashboard');
     Route::resource('users', 'UserController')->middleware('auth');
