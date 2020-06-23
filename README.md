@@ -35,7 +35,7 @@ php artisan serve
 user@user.com
 12345678
 </pre>
-- Login user admin
+- Login user com autorização de administrador
 <pre>
 admin@admin.com
 12345678
