@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::group(['middleware' => ['is_admin', 'admin'], 'namespace' => 'Admin'], function () {
-Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin','middleware' => ['auth'], 'namespace' => 'Admin'], function () {
     require_once 'web_builder.php';
+    Route::get('/dashboard', 'HomeController@index')->name('admin.dashboard');
   });
 
 Route::get('/', function () {
